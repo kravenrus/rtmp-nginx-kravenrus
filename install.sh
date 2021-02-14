@@ -13,11 +13,11 @@ cd nginx
 make
 sudo make install
 
-cd -
+cd ../..
 cp /usr/local/nginx/conf/nginx.conf /usr/local/nginx/conf/nginx.conf.bak
 rm /usr/local/nginx/conf/nginx.conf
 cp nginx.conf /usr/local/nginx/conf/nginx.conf
 cp nginx /etc/init.d/nginx
 sudo chmod +x /etc/init.d/nginx
 sudo update-rc.d nginx defaults
-reboot
+sudo reboot
