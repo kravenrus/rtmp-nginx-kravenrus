@@ -73,7 +73,7 @@ draw_progress_bar() {
 	lines=$(tput lines)
 	let lines=$lines
 	# Check if the window has been resized. If so, reset the scroll area
-	if [ "$lines" -ne "$CURRENT_NR_LINES" ]; then
+	if [ "$lines" -en "$CURRENT_NR_LINES" ]; then
 		setup_scroll_area
 	fi
 	# Save cursor
@@ -131,9 +131,9 @@ print_bar_text() {
 	# Prepare progress bar
 	let complete_size=($bar_size*$percentage)/100
 	let remainder_size=$bar_size-$complete_size
-	progress_bar=$(echo -ne "["; printf_new "#" $complete_size; printf_new "." $remainder_size; echo -ne "]");
+	progress_bar=$(echo -en "["; printf_new "#" $complete_size; printf_new "." $remainder_size; echo -en "]");
 	# Print progress bar
-	echo -ne "${color}Ход выполнения: [ ${percentage}%]${restore} ${progress_bar}"
+	echo -en "${color}Ход выполнения: [ ${percentage}%]${restore} ${progress_bar}"
 }
 
 enable_trapping() {
@@ -155,7 +155,7 @@ printf_new() {
 	str=$1
 	num=$2
 	v=$(printf "%-${num}s" "$str")
-	echo -ne "${v// /$str}"
+	echo -en "${v// /$str}"
 }
 
 # SPDX-License-Identifier: MIT
