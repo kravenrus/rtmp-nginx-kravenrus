@@ -50,7 +50,7 @@ read -p "Введите порт прослушиваемый HTTP-сервер�
 if [ -z "$RTMP_PORT" ]; then RTMP_PORT=1935; fi > /dev/null 2>&1
 if [ -z "$HTTP_PORT" ]; then HTTP_PORT=80; fi > /dev/null 2>&1
 
-sed -i -e 's/RTMP_PORT/'$RTMP_PORT'/; s/HTTP_PORT/'$HTTP_PORT'/' ./nginx.conf > /dev/null 2>&1
+sed -i -e 's/RTMP_PORT/'$RTMP_PORT'/; s/HTTP_PORT/'$HTTP_PORT'/' /usr/local/nginx/conf/nginx.conf > /dev/null 2>&1
 
 draw_progress_bar 95
 
