@@ -9,7 +9,7 @@ setup_scroll_area
 
 echo -en "Обновление базы данных пакетов..."
 sudo apt update > /dev/null 2>&1
-echo "Успешно!"; echo "Успешно!"; draw_progress_bar 5
+echo "Успешно!"; draw_progress_bar 5
 echo -en "Установка инструментов для сборки NGINX..."
 sudo apt install -y build-essential > /dev/null 2>&1
 echo "Успешно!"; draw_progress_bar 15
