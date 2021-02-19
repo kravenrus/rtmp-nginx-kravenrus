@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # Source progress bar
 source ./progress_bar.sh
 # Make sure that the progress bar is cleaned up when user presses ctrl+c
