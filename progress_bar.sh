@@ -73,7 +73,7 @@ draw_progress_bar() {
 	lines=$(tput lines)
 	let lines=$lines
 	# Check if the window has been resized. If so, reset the scroll area
-	if [ "$lines" -en "$CURRENT_NR_LINES" ]; then
+	if [ "$lines" -ne "$CURRENT_NR_LINES" ]; then
 		setup_scroll_area
 	fi
 	# Save cursor
