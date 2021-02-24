@@ -49,14 +49,18 @@ sudo a2enconf phpmyadmin.conf
 sudo service mysql restart
 sudo service apache2 restart
 ####################################################################
-sudo apt install -y gnupg2 net-tools wget
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+sudo apt install -y gnupg2 net-tools curl
+# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 sudo apt update
-sudo apt -y install postgresql-12 postgresql-client-12
+sudo apt -y install postgresql-13 postgresql-client-13
 sudo -u postgres psql -f postgres.sql
-cat postgresql.conf > /etc/postgresql/12/main/postgresql.conf
-cat pg_hba.conf > /etc/postgresql/12/main/pg_hba.conf
+cat postgresql.conf > /etc/postgresql/13/main/postgresql.conf
+cat pg_hba.conf > /etc/postgresql/13/main/pg_hba.conf
 sudo service postgresql restart
 ####################################################################
-sudo apt install -y pgadmin4 pgadmin4-apache2
+sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add -
+echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" | sudo tee /etc/apt/sources.list.d/pgadmin4.list
+sudo apt update
+sudo apt install -y pgadmin4
