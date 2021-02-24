@@ -20,18 +20,19 @@ mkdir -p /var/www/example.com/public_html
 cat index.html > /var/www/example.com/public_html/index.html
 # cat index.php > /var/www/example.com/public_html/index.php
 chown -R www-data:www-data /var/www
-service apache2 stop
+sudo service apache2 stop
 ####################################################################
 sudo apt install -y mariadb-server
-service mysql start
+sudo service mysql start
 mysql_secure_installation
 mariadb < mariadb.sql
 sleep 5
-service mysql stop
+sudo service mysql stop
 ####################################################################
 sudo apt install -y php libapache2-mod-php php-mysql php-mbstring php-gd php-dom
 cat dir.conf > /etc/apache2/mods-enabled/dir.conf
 ####################################################################
+sudo apt install -y pwgen
 wget https://files.phpmyadmin.net/phpMyAdmin/5.1.0/phpMyAdmin-5.1.0-all-languages.zip
 unzip phpMyAdmin-5.1.0-all-languages.zip
 mv phpMyAdmin-5.1.0-all-languages/ /usr/share/phpmyadmin
@@ -40,15 +41,15 @@ chown -R www-data:www-data /var/lib/phpmyadmin
 cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 cat config.inc.php > /usr/share/phpmyadmin/config.inc.php
 sed -i -e 's/SECRET_KEY/'$(pwgen -s 32 1)'/' /usr/share/phpmyadmin/config.inc.php
-service mysql start
+sudo service mysql start
 mariadb < /usr/share/phpmyadmin/sql/create_tables.sql
 sleep 5
-service mysql stop
+sudo service mysql stop
 cat phpmyadmin.conf > /etc/apache2/conf-available/phpmyadmin.conf
 sudo a2enconf phpmyadmin.conf
 
-service apache2 start
-service mysql start
+sudo service apache2 start
+sudo service mysql start
 ####################################################################
 #apt install -y gnupg2 net-tools
 #wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
