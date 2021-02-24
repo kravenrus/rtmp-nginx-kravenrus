@@ -11,25 +11,25 @@ sudo apt update
 sudo apt install -y apache2 apache2-utils
 cat apache2.conf > /etc/apache2/apache2.conf
 cat example.com.conf > /etc/apache2/sites-available/example.com.conf
-htpasswd -c /etc/apache2/.htpasswd admin
-a2enmod rewrite
-a2ensite example.com.conf
-a2dissite 000-default.conf
-a2dissite default-ssl.conf
+# htpasswd -c /etc/apache2/.htpasswd admin
+sudo a2enmod rewrite
+sudo a2ensite example.com.conf
+sudo a2dissite 000-default.conf
+sudo a2dissite default-ssl.conf
 mkdir -p /var/www/example.com/public_html
 cat index.html > /var/www/example.com/public_html/index.html
 # cat index.php > /var/www/example.com/public_html/index.php
 chown -R www-data:www-data /var/www
 service apache2 stop
 ####################################################################
-apt install -y mariadb-server
+sudo apt install -y mariadb-server
 service mysql start
 mysql_secure_installation
 mariadb < mariadb.sql
 sleep 5
 service mysql stop
 ####################################################################
-apt install -y php libapache2-mod-php php-mysql php-mbstring php-gd php-dom
+sudo apt install -y php libapache2-mod-php php-mysql php-mbstring php-gd php-dom
 cat dir.conf > /etc/apache2/mods-enabled/dir.conf
 ####################################################################
 wget https://files.phpmyadmin.net/phpMyAdmin/5.1.0/phpMyAdmin-5.1.0-all-languages.zip
@@ -45,7 +45,7 @@ mariadb < /usr/share/phpmyadmin/sql/create_tables.sql
 sleep 5
 service mysql stop
 cat phpmyadmin.conf > /etc/apache2/conf-available/phpmyadmin.conf
-a2enconf phpmyadmin.conf
+sudo a2enconf phpmyadmin.conf
 
 service apache2 start
 service mysql start
